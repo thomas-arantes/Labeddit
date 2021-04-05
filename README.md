@@ -1,12 +1,8 @@
-#### LabEddit
+# LabEddit
 
 Front-end de uma rede social semelhante ao Reddit, onde é possível fazer posts, comentar nos posts de outras pessoas e votar positivamente ou negativamente. Esta aplicação utiliza uma API desenvolvida pela Labenu. Cadastre-se para utilizar
 
 Projeto desenvolvido com Create React App.
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
