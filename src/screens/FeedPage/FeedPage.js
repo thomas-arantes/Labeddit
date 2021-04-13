@@ -1,13 +1,14 @@
 import React from 'react'
-import { baseUrl } from '../constants/baseUrl';
-import { useProtectPage } from '../hooks/useProtectPage';
-import { useRequestData } from '../hooks/useRequestPosts';
-import PostCard from '../components/PostCard'
-import { useForm } from '../hooks/useForm'
+import { baseUrl } from '../../constants/baseUrl';
+import { useProtectPage } from '../../hooks/useProtectPage';
+import { useRequestData } from '../../hooks/useRequestPosts';
+import PostCard from '../../components/PostCard'
+import { useForm } from '../../hooks/useForm'
 import CardContent from '@material-ui/core/CardContent';
 import {TextField, Button} from '@material-ui/core'
-import { createPost } from '../services/createPost'
-import { CardStyled, FeedContainer, CardFlex } from '../screens/style'
+import { createPost } from '../../services/createPost'
+import { CardStyled, FeedContainer, CardFlex } from './styled'
+import Header from '../../components/Header/Header';
 
 
 
@@ -43,6 +44,7 @@ const FeedPage = () => {
 
     return (
       <FeedContainer>
+        <Header/>
         <CardStyled>
         <CardContent>
           <CardFlex onSubmit={handleSubmission}>
@@ -61,7 +63,14 @@ const FeedPage = () => {
                 value={form.text}
                 onChange={handleInputChange}>
             </TextField>
-            <Button type="submit" size="small">Postar</Button>
+            <Button 
+              type="submit" 
+              size="small"
+              variant = {"contained"}
+              color = {"primary"}
+            >
+              Postar
+            </Button>
           </CardFlex>   
         </CardContent>      
       </CardStyled>

@@ -1,10 +1,11 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {useForm} from '../hooks/useForm'
-import {login} from '../services/user'
-import {useUnprotectedPage} from '../hooks/useUnprotectedPage'
-import {TextField, Button} from '@material-ui/core'
-import { LoginContainer, LoginPageContainer } from '../screens/style'
+import {useForm} from '../../hooks/useForm'
+import {login} from '../../services/user'
+import {useUnprotectedPage} from '../../hooks/useUnprotectedPage'
+import {TextField, Button, Typography} from '@material-ui/core'
+import { LoginContainer, LoginPageContainer, StyledToolbar } from './styled'
+import AppBar from '@material-ui/core/AppBar';
 
 const LoginPage = () => {
     useUnprotectedPage();
@@ -28,7 +29,19 @@ const LoginPage = () => {
 
         return (
         <LoginPageContainer>
-            <LoginContainer onSubmit={handleSubmission}>    
+
+            <AppBar position="static">
+                <StyledToolbar>
+                <Button color="inherit">
+                    Labeddit
+                </Button>
+                </StyledToolbar>
+            </AppBar>
+
+            <LoginContainer onSubmit={handleSubmission}>
+                <Typography>
+                    Faça seu Login!
+                </Typography>    
                 <TextField 
                     label="E-mail"
                     variant="outlined"
@@ -45,9 +58,21 @@ const LoginPage = () => {
                     value={form.password}
                     onChange={handleInputChange}
                 />
-                <Button type="submit">Entrar</Button>
+                <Button 
+                    type="submit"
+                    variant = {"contained"}
+                    color = {"primary"}
+                >
+                    Entrar
+                </Button>
             </LoginContainer>
-            <Button onClick={goToSignUpPage}>Ainda não tem uma conta? Faça seu cadastro</Button>
+            <Button 
+                onClick={() => goToSignUpPage(history)}
+                variant = {"text"}
+                color = {"primary"}
+            >
+                Ainda não tem uma conta? Faça seu cadastro
+            </Button>
         </LoginPageContainer>
         );
     }

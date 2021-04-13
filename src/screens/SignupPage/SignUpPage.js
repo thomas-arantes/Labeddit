@@ -1,10 +1,12 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import {useForm} from '../hooks/useForm'
-import {signUp} from '../services/user'
-import {useUnprotectedPage} from '../hooks/useUnprotectedPage'
-import {TextField, Button} from '@material-ui/core'
-import { LoginContainer, LoginPageContainer } from '../screens/style'
+import {useForm} from '../../hooks/useForm'
+import {signUp} from '../../services/user'
+import {useUnprotectedPage} from '../../hooks/useUnprotectedPage'
+import {TextField, Button, Typography} from '@material-ui/core'
+import { SignupContainer, SignupPageContainer, StyledToolbar } from './styled'
+import { goToLoginPage } from '../../routes/coordinator'
+import AppBar from '@material-ui/core/AppBar';
 
 const SignUpPage = () => {
     useUnprotectedPage();
@@ -25,8 +27,20 @@ const SignUpPage = () => {
 
 
     return (
-      <LoginPageContainer className="App">
-        <LoginContainer onSubmit={handleSubmission}>
+      <SignupPageContainer className="App">
+
+        <AppBar position="static">
+          <StyledToolbar>
+            <Button color="inherit">
+              Labeddit
+            </Button>
+          </StyledToolbar>
+        </AppBar>
+
+        <SignupContainer onSubmit={handleSubmission}>
+          <Typography>
+            Cadastre-se aqui!
+          </Typography>
           <TextField 
             label="Nome"
             variant="outlined"
@@ -50,9 +64,22 @@ const SignUpPage = () => {
             value={form.password}
             onChange={handleInputChange}
           />
-          <Button type="submit">Cadastrar</Button>
-        </LoginContainer>
-      </LoginPageContainer>
+          <Button 
+            type="submit"
+            variant = {"contained"}
+            color = {"primary"}
+          >
+            Cadastrar
+          </Button>
+        </SignupContainer>
+        <Button 
+          onClick={() => goToLoginPage(history)}
+          variant = {"text"}
+          color = {"primary"}
+        >
+          Já tem uma conta? Faça Login
+        </Button>
+      </SignupPageContainer>
     );
   }
   

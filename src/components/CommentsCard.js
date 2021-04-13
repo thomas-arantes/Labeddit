@@ -1,16 +1,30 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
+import { useParams } from 'react-router-dom'
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { CardStyled } from '../screens/style'
-
+import { vote } from '../services/vote'
+import { baseUrl } from '../constants/baseUrl';
 
     function CommentsCard(props) {
+      const params = useParams();
 
+      const positiveVoteBody = {direction: 1}
+      const negativeVoteBody = {direction: -1}
 
+      const positiveVoteComment = () => {
+        vote(`${baseUrl}/posts/${params.id}/comment/${props.id}/vote`, positiveVoteBody)
+        console.log(params.id)
+      }
+  
+      const negativeVoteComment = () => {
+        vote(`${baseUrl}/posts/${params.Id}/comment/${props.id}/vote`, negativeVoteBody)
+        console.log("clicou -1")
+      }
+
+        console.log(props)
     return (
         <CardStyled>
           <CardContent>
@@ -25,9 +39,21 @@ import { CardStyled } from '../screens/style'
             </Typography>
           </CardContent>
           <CardActions>
-            <Button> Vote</Button>
+            <Button
+              onClick={() => positiveVoteComment(positiveVoteBody)}
+              variant = {"contained"}
+              // color = {props.comment.userVoteDirection === 1 ? "primary" : "disabled"}
+            > 
+              Vote
+            </Button>
             <p>{props.votes}</p>
-            <Button> Down Vote </Button>
+            <Button
+              onClick={() => negativeVoteComment(negativeVoteBody)}
+              variant = {"contained"}
+              //color = {props.comment.userVoteDirection === -1 ? "primary" : "disabled"}
+            > 
+              Down Vote   
+            </Button>
           </CardActions>
         </CardStyled>
       );

@@ -14,6 +14,6 @@ export const createComment = (url, body) => {
     })
     .catch(error => {
         alert("Erro ao criar o comentário, tente novamente mais tarde ")
-        console.log(error.message)
+        console.error(error.message)
     })
 }
