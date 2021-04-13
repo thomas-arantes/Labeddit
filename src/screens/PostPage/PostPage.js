@@ -1,15 +1,17 @@
 import React from 'react'
-import { useProtectPage } from '../hooks/useProtectPage';
+import { useProtectPage } from '../../hooks/useProtectPage';
 import { useParams } from 'react-router-dom';
-import { useRequestData } from '../hooks/useRequestPosts';
-import { baseUrl } from '../constants/baseUrl';
+import { useRequestData } from '../../hooks/useRequestPosts';
+import { baseUrl } from '../../constants/baseUrl';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import CommentsCard from '../components/CommentsCard'
-import MakeACommentCard from '../components/MakeACommentCard'
-import { CardStyled, FeedContainer, PostCardStyled, VotesContainer } from '../screens/style'
-import { vote } from '../services/vote'
+import CommentsCard from '../../components/CommentsCard'
+import MakeACommentCard from '../../components/MakeACommentCard'
+import { CardStyled, FeedContainer, PostCardStyled, VotesContainer } from './styled'
+import { vote } from '../../services/vote'
+import { CardActions } from '@material-ui/core';
+import Header from '../../components/Header/Header';
 
 
 const PostPage = () => {
@@ -40,9 +42,10 @@ const PostPage = () => {
     const negativeVote = () => {
       vote(`${baseUrl}/posts/${params.id}/vote`, negativeVoteBody)
     }
-
+    
     return (
       <FeedContainer className="App">
+        <Header/>
             {postDetails && <CardStyled>
               <CardContent>
                 <Typography color="textSecondary" component="h2" gutterBottom>
@@ -55,12 +58,25 @@ const PostPage = () => {
                 {postDetails.text}
                 </Typography>
               </CardContent>
+
               <PostCardStyled>
-                <VotesContainer>
-                  <Button onClick={() => positiveVote(positiveVoteBody)}> Vote</Button>
+                <CardActions>
+                  <Button 
+                    onClick={() => positiveVote(positiveVoteBody)}
+                    variant = {"contained"}
+                    color = {postDetails.userVoteDirection ===  1 ? "primary" : "disabled"}
+                  > 
+                    Vote
+                  </Button>
                   <p>{postDetails.votesCount}</p>
-                  <Button onClick={() => positiveVote(negativeVoteBody)}> Down Vote </Button>
-                </VotesContainer>
+                  <Button 
+                    onClick={() => negativeVote(negativeVoteBody)}
+                    variant = {"contained"}
+                    color = {postDetails.userVoteDirection ===  -1 ? "secondary" : "disabled"}
+                  > 
+                    Down Vote 
+                  </Button>
+                </CardActions>
                 <p>{postDetails.commentsCount} Comentários</p>
               </PostCardStyled>
             </CardStyled>}

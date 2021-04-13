@@ -1,12 +1,11 @@
 import React from 'react'
 import { baseUrl } from '../constants/baseUrl';
 import { useForm } from '../hooks/useForm'
-import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { createComment } from '../services/createComment'
 import { useParams } from 'react-router-dom';
 import {TextField, Button} from '@material-ui/core'
-import { CardStyled } from '../screens/style'
+import { CardStyled, CommentCard } from '../screens/style'
 
 function MakeACommentCard() {
 
@@ -28,14 +27,23 @@ function MakeACommentCard() {
         <CardStyled>
             <CardContent>
                 <form onSubmit={handleSubmission}>
-                <TextField 
-                    label="Caixa de comentário"
-                    variant="outlined"
-                    name="text"
-                    multiline
-                    value={form.text}
-                    onChange={handleInputChange} />
-                    <Button type="submit">Comentar</Button>
+                    <CommentCard>
+                        <TextField 
+                            label="Caixa de comentário"
+                            variant="outlined"
+                            name="text"
+                            multiline
+                            value={form.text}
+                            onChange={handleInputChange} />
+                            
+                            <Button 
+                                type="submit"
+                                variant = {"contained"}
+                                color = {"primary"}
+                            >
+                                Comentar
+                            </Button>
+                    </CommentCard>
                 </form>
             </CardContent>
         </CardStyled>
